@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Connexion Phantom</title>
+</head>
+<body>
+  <h2>Connexion à Phantom Wallet</h2>
+  <button onclick="connecterPhantom()">Se connecter</button>
+  <p id="status">En attente de connexion...</p>
+
+  <script>
+    async function connecterPhantom() {
+      const status = document.getElementById('status');
+      if ('solana' in window) {
+        const provider = window.solana;
+        if (provider.isPhantom) {
+          try {
+            const res = await provider.connect();
+            status.innerText = "Connecté : " + res.publicKey.toString();
+          } catch (err) {
+            status.innerText = "Erreur : " + err.message;
+          }
+        } else {
+          status.innerText = "Phantom non détecté.";
+        }
+      } else {
+        status.innerText = "Solana non disponible.";
+      }
+    }
+  </script>
+</body>
+</html>
