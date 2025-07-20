@@ -1,0 +1,2 @@
+# Fantom-connect
+Wallet fantom
